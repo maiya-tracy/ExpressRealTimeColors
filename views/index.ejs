@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      var socket = io();
+
+      $('#green').click(function() {
+        socket.emit('greenclick')
+      });
+      $('#blue').click(function() {
+        socket.emit('blueclick')
+      });
+      $('#red').click(function() {
+        socket.emit('redclick')
+      });
+      $('#yellow').click(function() {
+        socket.emit('yellowclick')
+      });
+      $('#black').click(function() {
+        socket.emit('blackclick')
+      });
+      $('#white').click(function() {
+        socket.emit('whiteclick')
+      });
+      socket.on('updateAllClients', function(data) {
+        console.log("hahahhahaa");
+        console.log(data.color);
+        $('#pagebox').css('background-color', data.color)
+      });
+    })
+  </script>
+  <style>
+    input {
+      height: 150px;
+      width: 150px;
+      margin: 5px;
+    }
+    #boxes {
+      margin: 30% 20%;
+    }
+  </style>
+</head>
+
+<body id="pagebox" name="pagebox">
+  <div class="container">
+    <div id="boxes">
+      <input name="green" id="green" class="btn btn-outline-success" type='submit' value=''>
+      <input name="blue" id="blue" class="btn btn-outline-primary" type='submit' value=''>
+      <input name="red" id="red" class="btn btn-outline-danger" type='submit' value=''>
+      <input name="yellow" id="yellow" class="btn btn-outline-warning" type='submit' value=''>
+      <input name="black" id="black" class="btn btn-outline-dark" type='submit' value=''>
+      <input name="white" id="white" class="btn btn-outline-light" type='submit' value=''>
+    </div>
+  </div>
+</body>
+
+</html>
